@@ -64,5 +64,25 @@ namespace Calculator.Test.Unit
             //Act + Assert
             Assert.That(uut.Power(x, y), Is.EqualTo(expected)); 
         }
+
+        [TestCase(5, 2, 2.5)]
+        [TestCase(5, -1, -5)]
+        public void Divide_Them_Numbers(double x, double y, double expected)
+        {
+            //Arrange in Setup
+
+            //Act + Assert
+            Assert.That(uut.Divide(x, y), Is.EqualTo(expected));
+        }
+
+       
+        [Test]
+        public void Divide_With_Zero_and_Die()
+        {
+            //Arrange in Setup
+
+            //Act + Assert
+            Assert.That(() => uut.Divide(2,0),Throws.TypeOf<DivideByZeroException>());
+        }
     }
 }
