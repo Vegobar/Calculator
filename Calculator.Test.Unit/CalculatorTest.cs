@@ -99,22 +99,26 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
 
-        [Test]
-        public void testing_cascade_call_for_add()
+        [TestCase(2, 2)]
+        [TestCase(-3, 2)]
+        [TestCase(3.3, 8.2)]
+        public void testing_cascade_call_for_add(double x, double y)
         {
-            uut.Add(5);
-            uut.Add(5, 5);
+            uut.Add(x);
+            uut.Add(x, y);
 
-            Assert.That(uut.Accumulator, Is.EqualTo(15));
+            Assert.That(uut.Accumulator, Is.InRange(x+x+y-0.1,x+x+y+0.1));
         }
 
-        [Test]
-        public void testing_cascade_call_for_multi()
+        [TestCase(4, 5)]
+        [TestCase(-3, 7)]
+        [TestCase(7.5, 4.5)]
+        public void testing_cascade_call_for_multi(double x, double y)
         {
-            uut.Multiply(5, 5);
-            uut.Multiply(2);
+            uut.Multiply(x, y);
+            uut.Multiply(x);
 
-            Assert.That(uut.Accumulator, Is.EqualTo(50));
+            Assert.That(uut.Accumulator, Is.EqualTo((x*y)*x));
         }
     }
 }
