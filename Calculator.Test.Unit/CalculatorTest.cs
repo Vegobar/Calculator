@@ -62,7 +62,7 @@ namespace Calculator.Test.Unit
             //Arrange in Setup
 
             //Act + Assert
-            Assert.That(uut.Power(x, y), Is.EqualTo(expected));
+            Assert.That(uut.Power(x, y), Is.EqualTo(expected)); 
         }
     }
 }
