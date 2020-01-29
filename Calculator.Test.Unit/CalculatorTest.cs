@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 
 namespace Calculator.Test.Unit
 {
@@ -56,7 +56,7 @@ namespace Calculator.Test.Unit
             //Arrange in Setup
 
             //Act + Assert
-            Assert.That(uut.Power(x, y), Is.EqualTo(expected)); 
+            Assert.That(uut.Power(x, y), Is.EqualTo(expected));
         }
 
         [TestCase(5, 2, 2.5)]
@@ -69,17 +69,16 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Divide(x, y), Is.EqualTo(expected));
         }
 
-       
         [Test]
         public void Divide_With_Zero_and_Die()
         {
             //Arrange in Setup
 
             //Act + Assert
-            Assert.That(() => uut.Divide(2,0),Throws.TypeOf<DivideByZeroException>());
+            Assert.That(() => uut.Divide(2, 0), Throws.TypeOf<DivideByZeroException>());
         }
 
-        [TestCase(2,0)]
+        [TestCase(2, 0)]
         [TestCase(2, 2)]
         [TestCase(-2, 2)]
         [TestCase(-2, -2)]
@@ -93,8 +92,8 @@ namespace Calculator.Test.Unit
         {
             uut.Add(2, 2);
             uut.Clear();
-            
-            Assert.That(uut.Accumulator,Is.EqualTo(0));
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
     }
 }
