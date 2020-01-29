@@ -19,7 +19,7 @@ namespace Calculator.Test.Unit
         }
 
 
-        [TestCase(1,2,3)]
+        [TestCase(2,2,4)]
         [TestCase(-3,2,-1)]
         [TestCase(3.3,8.2,11.5)]
         public void Add_Numbers(double x, double y, double expected)
