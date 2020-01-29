@@ -134,7 +134,7 @@ namespace Calculator.Test.Unit
 
         //Testing accumulator
 
-        [TestCase(2,0)]
+        [TestCase(2, 0)]
         [TestCase(2, 2)]
         [TestCase(-2, 2)]
         [TestCase(-2, -2)]
@@ -143,13 +143,77 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Add(x, y), Is.EqualTo(uut.Accumulator));
         }
 
-        [Test]
-        public void test_clear_accumulator()
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator(double x, double y)
         {
-            uut.Add(2, 2);
+            uut.Add(x, y);
             uut.Clear();
-            
-            Assert.That(uut.Accumulator,Is.EqualTo(0));
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator_sub(double x, double y)
+        {
+            uut.Subtract(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator_multi(double x, double y)
+        {
+            uut.Multiply(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator_divide(double x, double y)
+        {
+            uut.Divide(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 2)]
+        [TestCase(-3, 2)]
+        [TestCase(3.3, 8.2)]
+        public void testing_cascade_call_for_add(double x, double y)
+        {
+            uut.Add(x);
+            uut.Add(x, y);
+
+            Assert.That(uut.Accumulator, Is.InRange(x + x + y - 0.1, x + x + y + 0.1));
+        }
+
+        [TestCase(4, 5)]
+        [TestCase(-3, 7)]
+        [TestCase(7.5, 4.5)]
+        public void testing_cascade_call_for_multi(double x, double y)
+        {
+            uut.Multiply(x, y);
+            uut.Multiply(x);
+
+            Assert.That(uut.Accumulator, Is.EqualTo((x * y) * x));
         }
     }
 }
