@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Calculator.Test.Unit
 {
@@ -18,10 +13,9 @@ namespace Calculator.Test.Unit
             uut = new Calculator();
         }
 
-
-        [TestCase(2,2,4)]
-        [TestCase(-3,2,-1)]
-        [TestCase(3.3,8.2,11.5)]
+        [TestCase(2, 2, 4)]
+        [TestCase(-3, 2, -1)]
+        [TestCase(3.3, 8.2, 11.5)]
         public void Add_Numbers(double x, double y, double expected)
         {
             //Arrange in Setup
@@ -30,10 +24,10 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Add(x, y), Is.EqualTo(expected));
         }
 
-        [TestCase(33,40,-7)]
-        [TestCase(85,40,45)]
-        [TestCase(77.5,33.4,44.1)]
-        [TestCase(-77.5,-33.4,-44.1)]
+        [TestCase(33, 40, -7)]
+        [TestCase(85, 40, 45)]
+        [TestCase(77.5, 33.4, 44.1)]
+        [TestCase(-77.5, -33.4, -44.1)]
         public void Subtract_Numbers(double x, double y, double expected)
         {
             //Arrange in Setup
@@ -41,7 +35,6 @@ namespace Calculator.Test.Unit
             //Act + Assert
             Assert.That(uut.Subtract(x, y), Is.EqualTo(expected));
         }
-
 
         [TestCase(4, 5, 20)]
         [TestCase(-3, 7, -21)]
@@ -83,6 +76,15 @@ namespace Calculator.Test.Unit
 
             //Act + Assert
             Assert.That(() => uut.Divide(2,0),Throws.TypeOf<DivideByZeroException>());
+        }
+
+        [TestCase(2,0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        public void test_accumulator_when_adding(double x, double y)
+        {
+            Assert.That(uut.Add(x, y), Is.EqualTo(uut.Accumulator));
         }
     }
 }
