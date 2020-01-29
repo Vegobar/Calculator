@@ -12,16 +12,37 @@ namespace Calculator
             return a + b;
         }
 
+        public double Add(double addend)
+        {
+            return (Accumulator += addend);
+        }
+
+        
         public double Subtract(double a, double b)
         {
             Accumulator = a + b;
             return a - b;
         }
 
+        public double Subtract(double subtractor)
+        {
+            return (Accumulator -= subtractor);
+        }
+
+        public double Multiply(double multiplier)
+        {
+            return (Accumulator *= multiplier);
+        }
+
         public double Multiply(double a, double b)
         {
             Accumulator = a + b;
             return a * b;
+        }
+
+        public double Power(double exponent)
+        {
+            return Accumulator = Math.Pow(Accumulator, exponent);
         }
 
         public double Power(double x, double exp)
@@ -37,8 +58,7 @@ namespace Calculator
                throw new System.DivideByZeroException();
             }
 
-           return dividend / divisor;
-
+           return (Accumulator= (dividend / divisor));
        }
 
         public void Clear()
