@@ -87,8 +87,11 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Add(x, y), Is.EqualTo(uut.Accumulator));
         }
 
-        [Test]
-        public void test_clear_accumulator()
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        public void test_clear_accumulator(double x, double y)
         {
             uut.Add(2, 2);
             uut.Clear();
