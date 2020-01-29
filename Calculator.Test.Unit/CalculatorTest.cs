@@ -91,9 +91,48 @@ namespace Calculator.Test.Unit
         [TestCase(2, 2)]
         [TestCase(-2, 2)]
         [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
         public void test_clear_accumulator(double x, double y)
         {
-            uut.Add(2, 2);
+            uut.Add(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator_sub(double x, double y)
+        {
+            uut.Subtract(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 0)]
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5,3.5)]
+        public void test_clear_accumulator_multi(double x, double y)
+        {
+            uut.Multiply(x, y);
+            uut.Clear();
+
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [TestCase(2, 2)]
+        [TestCase(-2, 2)]
+        [TestCase(-2, -2)]
+        [TestCase(2.5, 3.5)]
+        public void test_clear_accumulator_divide(double x, double y)
+        {
+            uut.Divide(x, y);
             uut.Clear();
 
             Assert.That(uut.Accumulator, Is.EqualTo(0));
