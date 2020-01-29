@@ -95,5 +95,23 @@ namespace Calculator.Test.Unit
 
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
+
+        [Test]
+        public void testing_cascade_call_for_add()
+        {
+            uut.Add(5);
+            uut.Add(5, 5);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(15));
+        }
+
+        [Test]
+        public void testing_cascade_call_for_multi()
+        {
+            uut.Multiply(5, 5);
+            uut.Multiply(2);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(50));
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Calculator
 
         public double Add(double a, double b)
         {
-            return (Accumulator = (a + b));
+            return (Accumulator += (a + b));
         }
 
         public double Add(double addend)
@@ -18,7 +18,7 @@ namespace Calculator
 
         public double Subtract(double a, double b)
         {
-            return (Accumulator = (a - b));
+            return (Accumulator += (a - b));
         }
 
         public double Subtract(double subtractor)
@@ -33,7 +33,7 @@ namespace Calculator
 
         public double Multiply(double a, double b)
         {
-            return (Accumulator = (a * b));
+            return (Accumulator += (a * b));
         }
 
         public double Power(double exponent)
