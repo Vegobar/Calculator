@@ -38,7 +38,7 @@ namespace Calculator
 
         public double Power(double exponent)
         {
-            if (Accumulator == 0 && exponent == 0)
+            if (Accumulator == 0) // Removed exponent == 0, which equls to 1. Which is OK.
             {
                 throw new ArgumentException("Accumulator and exponent shouldn't be zero");
             }
