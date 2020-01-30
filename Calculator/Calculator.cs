@@ -38,11 +38,28 @@ namespace Calculator
 
         public double Power(double exponent)
         {
+            if (Accumulator == 0 && exponent == 0)
+            {
+                throw new ArgumentException("Accumulator and exponent shouldn't be zero");
+            }
+            else if (Accumulator < 0 && exponent < 1)
+            {
+                throw new ArgumentException("Accumulator and exponent returns NaN");
+            }
             return Accumulator = Math.Pow(Accumulator, exponent);
         }
 
         public double Power(double x, double exp)
         {
+            if (x == 0 && exp == 0)
+            {
+                throw new ArgumentException("x and exp shouldn't be zero - returns 0");
+            }
+
+            if (x < 0 && exp < 1)
+            {
+                throw new ArgumentException("x and exp returns NaN");
+            }
             Accumulator = Math.Pow(x, exp);
             return Math.Pow(x, exp);
         }
