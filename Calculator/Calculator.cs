@@ -66,7 +66,6 @@ namespace Calculator
 
         public double Divide(double dividend, double divisor)
         {
-
             if (divisor == 0)
             {
                 throw new System.DivideByZeroException();
