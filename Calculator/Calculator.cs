@@ -81,7 +81,7 @@ namespace Calculator
                 throw new System.DivideByZeroException();
             }
 
-            return (Accumulator / divisor);
+            return (Accumulator = (Accumulator / divisor));
         }
 
         public void Clear()

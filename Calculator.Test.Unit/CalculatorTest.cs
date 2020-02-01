@@ -199,14 +199,15 @@ namespace Calculator.Test.Unit
         }
 
 
-        [TestCase(45, 24, 7, 3,3)]
-        public void Single_Parameter_Fun(double x, double y, double w,double z, int result)
+        [TestCase(45, 24, 7, 3,9)]
+        [TestCase(-100,50,50,7,-21)]
+        [TestCase(5.5,2.5,2,3,4.5)]
+        public void Single_Parameter_Fun(double x, double y, double w,double z, double result)
         {
-            //uut.Clear();
             uut.Add(x);
             uut.Subtract(y);
             uut.Divide(w);
-            //uut.Multiply(z);
+            uut.Multiply(z);
 
             Assert.That(uut.Accumulator, Is.EqualTo(result));
         }
