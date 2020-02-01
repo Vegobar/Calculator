@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
 namespace Calculator.Test.Unit
@@ -170,6 +169,27 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
 
+        [TestCase(2, 2, 3,12)]
+        [TestCase(2.5,4.5,3,33.75)]
+        [TestCase(-4,2,-5,40)]
+        public void Multiply_For_Real(double x, double y, double z, double result)
+        {
+            uut.Multiply(x, y);
+            uut.Multiply(z);
+            Assert.That(uut.Accumulator,Is.EqualTo(result));
+        }
+
+        [TestCase(47, 92, -3, -42)]
+        [TestCase(-3, 6, -9, 0)]
+        [TestCase(9.7,5.5,2.2, 1.9999999999999991)]
+        public void Subtract_For_Real(double x, double y, double z, double result)
+        {
+            uut.Subtract(x, y);
+            uut.Subtract(z);
+            Assert.That(uut.Accumulator, Is.EqualTo(result));
+        }
+
+
         [TestCase(2, 0)]
         [TestCase(2, 2)]
         [TestCase(-2, 2)]
@@ -217,8 +237,4 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo((x * y) * x));
         }
     }
-
-  
-
-
 }
