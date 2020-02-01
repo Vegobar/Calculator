@@ -74,6 +74,16 @@ namespace Calculator
             return (Accumulator = (dividend / divisor));
         }
 
+        public double Divide(double divisor)
+        {
+            if (divisor == 0)
+            {
+                throw new System.DivideByZeroException();
+            }
+
+            return (Accumulator / divisor);
+        }
+
         public void Clear()
         {
             Accumulator = 0;

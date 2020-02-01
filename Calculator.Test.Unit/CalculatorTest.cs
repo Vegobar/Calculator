@@ -186,6 +186,33 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(result));
         }
 
+        [TestCase(5, 3, 7,14)]
+        [TestCase(-2,6,2,-16)]
+        [TestCase(2,4.5,2,-5)]
+        public void Subtract_Multipli_Mix(double x, double y, double z, int result)
+        {
+            uut.Add(x);
+            uut.Subtract(y);
+            uut.Multiply(z);
+
+            Assert.That(uut.Accumulator,Is.EqualTo(result));
+        }
+
+
+        [TestCase(45, 24, 7, 3,3)]
+        public void Single_Parameter_Fun(double x, double y, double w,double z, int result)
+        {
+            //uut.Clear();
+            uut.Add(x);
+            uut.Subtract(y);
+            uut.Divide(w);
+            //uut.Multiply(z);
+
+            Assert.That(uut.Accumulator, Is.EqualTo(result));
+        }
+
+
+
 
         [TestCase(2, 0)]
         [TestCase(2, 2)]
