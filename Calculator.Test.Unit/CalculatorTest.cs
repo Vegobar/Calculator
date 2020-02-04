@@ -166,13 +166,13 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
 
-        [TestCase(2, 2, 3,12)]
-        [TestCase(2.5,4.5,3,33.75)]
-        [TestCase(-4,2,-5,40)]
-        public void Multiply_For_Real(double x, double y, double z, double result)
+        [TestCase(5, 2, 2.5,1)]
+        [TestCase(4.5,2.5,1.8,1)]
+        [TestCase(-8,2,-2,2)]
+        public void Divide_For_Real(double x, double y, double z, double result)
         {
-            uut.Multiply(x, y);
-            uut.Multiply(z);
+            uut.Divide(x, y);
+            uut.Divide(z);
             Assert.That(uut.Accumulator,Is.EqualTo(result));
         }
 
