@@ -112,6 +112,7 @@ namespace Calculator.Test.Unit
 
         [TestCase(5, 2, 2.5)]
         [TestCase(5, -1, -5)]
+        [TestCase(2,0.5,4)]
         public void Divide_Them_Numbers(double x, double y, double expected)
         {
             //Arrange in Setup
@@ -120,13 +121,15 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Divide(x, y), Is.EqualTo(expected));
         }
 
-        [Test]
-        public void Divide_With_Zero_and_Die()
+        [TestCase(2,0)]
+        [TestCase(-5,0)]
+        [TestCase(4.5,0)]
+        public void Divide_With_Zero_and_Die(double x, double y)
         {
             //Arrange in Setup
 
             //Act + Assert
-            Assert.That(() => uut.Divide(2, 0), Throws.TypeOf<DivideByZeroException>());
+            Assert.That(() => uut.Divide(x, y), Throws.TypeOf<DivideByZeroException>());
         }
 
         //Testing accumulator
