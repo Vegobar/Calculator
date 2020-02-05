@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Calculator.Test.Unit
 {
@@ -67,45 +68,97 @@ namespace Calculator.Test.Unit
             Assert.That(uut.Power(x, y), Is.EqualTo(expected));
         }
 
-        [TestCase(100, -3, 1e-6)]
-        public void Power_Little_number(double x, double y, double expected)
+        [Test]
+        public void Power_Little_number_first()
         {
-            Assert.That(uut.Power(x, y), Is.EqualTo(expected).Within(1e-7));
+            Assert.That(uut.Power(100, -3), Is.EqualTo(1e-6).Within(1e-7));
         }
 
         [Test]
-        public void Accumulator_Add_Power()
+        public void Power_Little_number_second()
         {
-            uut.Add(20, 10);
-            Assert.That(uut.Power(2), Is.EqualTo(900));
+            Assert.That(uut.Power(20, -6), Is.EqualTo(1.56e-8).Within(1e-9));
         }
 
         [Test]
-        public void Accumulator_Subtract_power()
+        public void Power_Little_number_third()
+        {
+            Assert.That(uut.Power(30, -4), Is.EqualTo(1.2e-6).Within(1e-7));
+        }
+
+
+        [TestCase(20,10,2,900)]
+        [TestCase(10,2,3,1728)]
+        [TestCase(10,25,5, 52521875)]
+        public void Accumulator_Add_Power(double x, double y, double exp, double result)
+        {
+            uut.Add(x, y);
+            Assert.That(uut.Power(exp), Is.EqualTo(result));
+        }
+
+        [Test]
+        public void Accumulator_Subtract_power_first()
         {
             uut.Subtract(100, 20);
             Assert.That(uut.Power(0.5), Is.EqualTo(8.944).Within(0.0005));
         }
 
         [Test]
-        public void Accumulator_Divide_Power()
+        public void Accumulator_Subtract_power_second()
         {
-            uut.Divide(50, 2);
-            Assert.That(uut.Power(3), Is.EqualTo(15625));
+            uut.Subtract(40, 5);
+            Assert.That(uut.Power(2), Is.EqualTo(1225));
+        }
+        [Test]
+        public void Accumulator_Subtract_power_third()
+        {
+            uut.Subtract(50, 12);
+            Assert.That(uut.Power(6), Is.EqualTo(3010936384));
         }
 
-        [Test]
-        public void Accumulator_Multipy_Power()
+        [TestCase(50,2,3,15625)]
+        [TestCase(90,5,5, 1889568)]
+        [TestCase(100,20,4,625)]
+        public void Accumulator_Divide_Power(double x, double y, double exp, double result)
         {
-            uut.Multiply(20, 4);
-            Assert.That(uut.Power(5), Is.EqualTo(3.2768e9));
+            uut.Divide(x, y);
+            Assert.That(uut.Power(exp), Is.EqualTo(result));
         }
 
-        [Test]
-        public void Accumulator_Power_Power()
+        [TestCase(20,4,5, 3.2768e9)]
+        [TestCase(6,9,5, 459165024)]
+        [TestCase(20,50,2, 1000000)]
+        public void Accumulator_Multipy_Power(double x, double y, double exp, double result)
         {
-            uut.Power(4, 4);
-            Assert.That(uut.Power(4), Is.EqualTo(4294967296));
+            uut.Multiply(x, y);
+            Assert.That(uut.Power(exp), Is.EqualTo(result));
+        }
+
+        [TestCase(4,4,4, 4294967296)]
+        [TestCase(10,2,3, 1000000)]
+        [TestCase(3,5,2, 59049)]
+        public void Accumulator_Power_Power(double x, double y, double exp, double result)
+        {
+            uut.Power(x, y);
+            Assert.That(uut.Power(exp), Is.EqualTo(result));
+        }
+
+        //Testing Power expection
+        [TestCase(-1,0.9)]
+        [TestCase(0,100)]
+        [TestCase(-5,-0.5)]
+        public void Test_exception_power(double x, double exp)
+        {
+            Assert.That(() => uut.Power(x, exp), Throws.TypeOf<ArgumentException>());
+        }
+
+        //Testing cascade Power expection
+        [TestCase(5)]
+        [TestCase(0.5)]
+        [TestCase(3)]
+        public void Test_cascade_exception_power(double x)
+        {
+            Assert.That(() => uut.Power(x), Throws.TypeOf<ArgumentException>());
         }
 
         //Testing Divide
@@ -126,10 +179,16 @@ namespace Calculator.Test.Unit
         [TestCase(4.5,0)]
         public void Divide_With_Zero_and_Die(double x, double y)
         {
-            //Arrange in Setup
-
-            //Act + Assert
             Assert.That(() => uut.Divide(x, y), Throws.TypeOf<DivideByZeroException>());
+        }
+
+        [TestCase(5, 2, 0)]
+        [TestCase(10, 6, 0)]
+        [TestCase(4.5, 3.5, 0)]
+        public void Divide_Cascade_With_Zero_and_Die(double x, double y, double divider)
+        {
+            uut.Add(x, y);
+            Assert.That(() => uut.Divide(divider), Throws.TypeOf<DivideByZeroException>());
         }
 
         //Testing accumulator

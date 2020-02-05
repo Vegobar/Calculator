@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace Calculator
 {
@@ -38,14 +39,16 @@ namespace Calculator
 
         public double Power(double exponent)
         {
-            if (Accumulator == 0) // Removed exponent == 0, which equls to 1. Which is OK.
+
+            if (Accumulator == 0)
             {
-                throw new ArgumentException("Accumulator and exponent shouldn't be zero");
+                throw new ArgumentException("Accumulator shouldn't be zero");
             }
-            else if (Accumulator < 0) //Removed exponent < 1, because its OK to take exponent of values less than 0.
+            else if (Accumulator < 0)
             {
                 throw new ArgumentException("Accumulator and exponent returns NaN");
             }
+            
             return Accumulator = Math.Pow(Accumulator, exponent);
         }
 
@@ -53,7 +56,7 @@ namespace Calculator
         {
             if (x == 0) //Removed exp == 0, because its OK to take exp of 0.
             {
-                throw new ArgumentException("x and exp shouldn't be zero - returns 0");
+                throw new ArgumentException("x shouldn't be zero");
             }
 
             if (x < 0 && exp < 1)
